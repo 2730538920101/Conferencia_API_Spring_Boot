@@ -1,0 +1,9 @@
+CREATE DATABASE IF NOT EXISTS Conferencia;
+
+USE Conferencia;
+
+CREATE TABLE users(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL
+);

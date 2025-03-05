@@ -1,0 +1,54 @@
+services:
+  database:
+    build:
+      context: ./database
+    image: carlosmz87/conferencias2025_database:latest
+    container_name: conferencias2025_database_container
+    ports:
+      - "3306:3306"
+    volumes:
+      - conferencia_data:/var/lib/mysql
+    networks:
+      - conferencia_network
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    restart: always
+
+
+  backend:
+    build:
+      context: ./api-conferencia
+    image: carlosmz87/conferencias2025_backend:latest
+    container_name: conferencias2025_backend_container
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+    networks:
+      - conferencia_network
+    restart: always
+ 
+
+  frontend:
+    build:
+      context: ./frontend
+    image: carlosmz87/conferencias2025_frontend:latest
+    container_name: conferencias2025_frontend_container
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - conferencia_network
+    restart: always
+
+
+volumes:
+  conferencia_data:
+
+networks:
+  conferencia_network:
+    driver: bridge

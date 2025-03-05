@@ -1,0 +1,29 @@
+services:
+
+  # Servicio para la base de datos
+  database:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: carlosmz87/conferencias2025_database:latest
+    container_name: conferencias2025_database_container
+    volumes:
+      - conferencia_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - conferencia_external_network
+    environment:
+      - MYSQL_ROOT_PASSWORD=Admin1234!
+      - MYSQL_DATABASE=Conferencia
+      - MYSQL_USER=DemoUser
+      - MYSQL_PASSWORD=Password1234!
+      
+  
+volumes:
+  conferencia_data:
+
+networks:
+  conferencia_external_network:
+    driver: bridge
+    external: true
