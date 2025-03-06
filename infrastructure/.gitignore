@@ -1,0 +1,7 @@
+terraform.tfvars.tf*
+.terraform 
+*.tfstate
+*.tfstate.backup
+*.tfstate.backup.*
+conferencia_key
+conferencia_key.pub
