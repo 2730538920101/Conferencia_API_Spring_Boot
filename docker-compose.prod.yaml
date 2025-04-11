@@ -1,0 +1,29 @@
+services:
+  backend:
+    image: carlosmz87/conferencias2025_backend:latest
+    container_name: conferencias2025_backend_container
+    ports:
+      - "8080:8080"
+    networks:
+      - conferencia_network
+    restart: always
+ 
+
+  frontend:
+    image: carlosmz87/conferencias2025_frontend:latest
+    container_name: conferencias2025_frontend_container
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - conferencia_network
+    restart: always
+
+
+volumes:
+  conferencia_data:
+
+networks:
+  conferencia_network:
+    driver: bridge

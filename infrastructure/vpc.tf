@@ -31,3 +31,17 @@ resource "aws_route_table_association" "PublicRTassociation" {
   subnet_id      = aws_subnet.PublicS1.id
   route_table_id = aws_route_table.PublicRT.id
 }
+
+resource "aws_subnet" "PrivateS1" {
+  vpc_id                  = aws_vpc.Conferencia_VPC.id
+  cidr_block              = var.private1
+  availability_zone       = "us-east-1a"
+  map_public_ip_on_launch = false
+}
+
+resource "aws_subnet" "PrivateS2" {
+  vpc_id                  = aws_vpc.Conferencia_VPC.id
+  cidr_block              = var.private2
+  availability_zone       = "us-east-1b"
+  map_public_ip_on_launch = false
+}
